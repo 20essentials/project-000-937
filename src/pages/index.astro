@@ -1,0 +1,33 @@
+---
+import OpenGraph from '@components/OpenGraph.astro'
+import Social from '@components/ui/Social.astro'
+import Layout from '@layouts/Layout.astro'
+
+import ParallaxSection from '@sections/index/ParallaxSection.astro'
+import BentoGrid from './_index/BentoGridSection.astro'
+import Hero from './_index/HeroSection.astro'
+import SliderSection from './_index/SliderSection.astro'
+
+const options = {
+  title: 'JSConf Chile 2025 | La más prestigiosa conferencia de JavaScript',
+  description:
+    'Acompáñanos en la tercera edición de la JSConf Chile donde tendremos Charlistas internacionales, comunidad, aprendizaje y conexiones.'
+}
+---
+
+<Layout options={options}>
+  <OpenGraph
+    description={options.description}
+    image="/og/og.jpg"
+    slot="social-media"
+    title={options.title}
+  />
+
+  <main>
+    <Hero />
+    <ParallaxSection />
+    <BentoGrid />
+    <SliderSection />
+    <Social />
+  </main>
+</Layout>

@@ -1,0 +1,51 @@
+---
+import { Icon } from 'astro-icon/components'
+
+interface Props {
+  title: string
+  href: string
+  label: string
+}
+
+const { title, href, label } = Astro.props;
+---
+<div class="click-to-scroll-wrapper">
+  <h3>{title}</h3>
+  <a aria-label={label} href={href}>
+    <Icon name="chevron-down" size={50} />
+  </a>
+</div>
+
+<style>
+  .click-to-scroll-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+
+    @media (width >= 1200px) {
+      gap: 20px;
+    }
+
+    @media (768px <= width <= 1199.98px) {
+      order: 1;
+    }
+
+    & h3 {
+      font-size: 24px;
+      font-weight: 600;
+      text-align: center;
+      text-wrap: pretty;
+      color: #404040;
+      margin: 0;
+
+      @media (width >= 1200px) {
+        font-size: 32px;
+      }
+    }
+
+    & a {
+      color: var(--yellow-500);
+    }
+  }
+</style>

@@ -1,0 +1,75 @@
+---
+interface Props {
+  title: string
+  body: string
+  horizontal?: boolean
+}
+
+const { title, body, horizontal } = Astro.props;
+---
+
+<div class={horizontal ? 'info-card-horizontal' : 'info-card'}>
+  <h3>{title}</h3>
+  <div class="info-card-content">
+    <p>{body}</p>
+    <slot />
+  </div>
+</div>
+<style>
+  .info-card {
+    background-color: #0c0a09;
+    border: 1px solid #292524;
+    border-radius: 0.5rem;
+    padding: 24px;
+    gap: 1rem;
+
+    & h3 {
+      margin: 0 0 16px;
+    }
+
+    & .info-card-content {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+
+      & p {
+        margin: 0;
+        color: var(--stone-500);
+      }
+    }
+  }
+
+  .info-card-horizontal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0c0a09;
+    border: 1px solid #292524;
+    border-radius: 0.5rem;
+    padding: 24px;
+    gap: 72px;
+
+    & h3 {
+      margin: 0;
+      text-wrap: nowrap;
+    }
+
+    & .info-card-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      & p {
+        margin: 0;
+        color: var(--stone-500);
+      }
+    }
+  }
+
+  @media (width <= 1024px) {
+    .info-card-horizontal {
+      flex-direction: column;
+      gap: 24px;
+    }
+  }
+</style>

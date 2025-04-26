@@ -1,0 +1,27 @@
+{
+	"version": 3,
+	"routes": [
+		{
+			"src": "^/(.*)/$",
+			"headers": {
+				"Location": "/$1"
+			},
+			"status": 308
+		},
+		{
+			"handle": "filesystem"
+		},
+		{
+			"src": "^/_astro/(.*)$",
+			"headers": {
+				"cache-control": "public, max-age=31536000, immutable"
+			},
+			"continue": true
+		},
+		{
+			"src": "^/.*$",
+			"dest": "/404.html",
+			"status": 404
+		}
+	]
+}

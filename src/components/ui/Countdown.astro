@@ -1,0 +1,204 @@
+  <div class="countdown">
+    <p class="coming-soon">Octubre 2025</p>
+    <div class="counters-wrapper">
+      <div class="counter">
+        <span id="days">00</span>
+        <p>Días</p>
+      </div>
+
+      <span class="separator"></span>
+
+      <div class="counter">
+        <span id="hours">00</span>
+        <p>Horas</p>
+      </div>
+
+      <span class="separator"></span>
+
+      <div class="counter">
+        <span id="minutes">00</span>
+        <p>Minutos</p>
+      </div>
+
+      <span class="separator"></span>
+
+      <div class="counter">
+        <span id="seconds">00</span>
+        <p>Segundos</p>
+      </div>
+    </div>
+  </div>
+
+<script>
+const countDownDate = new Date('Dec 05, 2024 09:00:00').getTime()
+
+const comingSoonText = document.querySelector('.coming-soon') as HTMLParagraphElement
+const countersWrapper = document.querySelector('.counters-wrapper') as HTMLDivElement
+
+const days = document.getElementById('days') as HTMLSpanElement
+const hours = document.getElementById('hours') as HTMLSpanElement
+const minutes = document.getElementById('minutes') as HTMLSpanElement
+const seconds = document.getElementById('seconds') as HTMLSpanElement
+
+if (!isNaN(countDownDate) && countDownDate > Date.now()) {
+  comingSoonText.classList.add('is-hide')
+  countersWrapper.classList.add('is-show')
+
+  const x = setInterval(() => {
+    const now = new Date().getTime()
+    const dateGap = countDownDate - now
+
+    if (dateGap < 0) {
+      clearInterval(Number(x))
+
+      comingSoonText.classList.remove('is-hide')
+      countersWrapper.classList.remove('is-show')
+    } else {
+      const getDays = Math.floor(dateGap / (1000 * 60 * 60 * 24))
+      const getHours = Math.floor(
+        (dateGap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      )
+      const getMinutes = Math.floor((dateGap % (1000 * 60 * 60)) / (1000 * 60))
+      const getSeconds = Math.floor((dateGap % (1000 * 60)) / 1000)
+
+      days.textContent = String(getDays < 10 ? `0${getDays}` : getDays)
+      hours.textContent = String(getHours < 10 ? `0${getHours}` : getHours)
+      minutes.textContent = String(getMinutes < 10 ? `0${getMinutes}` : getMinutes)
+      seconds.textContent = String(getSeconds < 10 ? `0${getSeconds}` : getSeconds)
+    }
+  }, 1000)
+}
+</script>
+
+<style>
+  .countdown {
+    width: 100%;
+    max-width: 586px;
+    height: auto;
+    max-height: 135px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto;
+    border-radius: var(--rounded-md);
+    outline: 1px solid var(--stone-700);
+
+    color: var(--white);
+
+    background: rgba(12, 10, 9, 0.7);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(20px);
+
+    @media (width >= 1200px) {
+      max-width: 696px;
+    }
+
+    & .counters-wrapper {
+      display: none;
+      width: 100%;
+      padding: 24px 32px;
+      justify-content: space-around;
+
+      &.is-show {
+        display: flex;
+      }
+
+      & .counter {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: "Inconsolata Variable", monospace;
+        line-height: 1;
+
+        & #days,
+        & #hours,
+        & #minutes,
+        & #seconds {
+          font-size: 56px;
+          font-weight: 700;
+        }
+
+        & p {
+          margin: 0;
+          font-size: 16px;
+          font-weight: 500;
+        }
+      }
+
+      & .separator {
+        width: 1px;
+        height: auto;
+        background: var(--stone-700);
+      }
+    }
+
+    & .coming-soon {
+      font-family: "Inconsolata Variable", monospace;
+      font-size: 56px;
+      font-weight: 700;
+      color: var(--white);
+      text-align: center;
+      margin: 0;
+
+      &.is-hide {
+        display: none;
+      }
+    }
+  }
+
+  @media (width <= 1024px) {
+    .countdown {
+      & .counters-wrapper {
+        padding: 25px 41px;
+        width: 100%;
+
+        & .counter {
+          & #days,
+          & #hours,
+          & #minutes,
+          & #seconds {
+            font-size: 51px;
+          }
+        }
+
+        & p {
+          font-size: 22px;
+        }
+      }
+
+      & .coming-soon {
+        font-size: 48px;
+      }
+    }
+  }
+
+  @media (width <= 768px) {
+    .countdown {
+      width: 100%;
+
+      & .counters-wrapper {
+        padding: 16px 24px;
+
+        & .counter {
+          & #days,
+          & #hours,
+          & #minutes,
+          & #seconds {
+            font-size: 32px;
+          }
+        }
+
+        & p {
+          font-size: 14px;
+        }
+      }
+
+      & .coming-soon {
+        font-size: 32px;
+      }
+    }
+  }
+</style>

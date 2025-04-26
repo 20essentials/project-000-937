@@ -1,0 +1,172 @@
+---
+import type { ButtonVariant, FontWeight } from '@contracts'
+
+import CallToAction from './CallToAction.astro'
+
+interface CtaItem {
+  label: string
+  description: string
+  url: string
+  variant: ButtonVariant
+  descriptionWeight: FontWeight
+}
+
+export const cta: CtaItem[] = [
+  {
+    label: 'Postula tu charla',
+    description: 'Comparte tus ideas con la comunidad de desarrolladores',
+    url: 'https://tally.so/r/me9dNx',
+    variant: 'outlined',
+    descriptionWeight: 'normal'
+  },
+  {
+    label: 'Hazte Sponsor',
+    description: '¡Destaca tu marca en el mayor evento tecnológico de Chile!',
+    url: 'https://tally.so/r/nGXXOp',
+    variant: 'contained',
+    descriptionWeight: 'bold'
+  },
+  {
+    label: 'Ver antiguas ediciones',
+    description: 'Mira lo que ya hemos hecho en los años anteriores',
+    url: 'https://gallery.jsconf.cl/',
+    variant: 'outlined',
+    descriptionWeight: 'normal'
+  }
+];
+---
+
+<footer class="footer">
+  <hgroup class="footer-header">
+    <h2 class="footer-title">Elige cómo ser parte de JSConf Chile 2025</h2>
+    <p class="footer-subtitle">Conecta, comparte y transforma con nosotros</p>
+  </hgroup>
+  <div class="footer-cta">
+    {
+      cta.map(
+        (
+          { label, description, url, variant, descriptionWeight },
+          index: number
+        ) => (
+          <>
+            <CallToAction
+              callToActionDescription={description}
+              callToActionLabel={label}
+              callToActionUrl={url}
+              descriptionWeight={descriptionWeight}
+              variant={variant}
+            />
+            {index < cta.length - 1 && <span class="separator" />}
+          </>
+        )
+      )
+    }
+  </div>
+
+  <div>
+    <span class="radial-gradient"></span>
+  </div>
+  <a
+    class="badge"
+    href="https://github.com/20essentials"
+    rel="noopener noreferrer"
+    target="_blank"
+  >
+    <img
+      alt="Badge"
+      decoding="async"
+      fetchpriority="low"
+      height="59"
+      loading="lazy"
+      src="/assets/favicon.webp"
+      width="59"
+    />
+  </a>
+</footer>
+
+<style>
+  .footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3.3rem;
+    text-wrap: pretty;
+    padding: 112px 62px 40px;
+    position: relative;
+    & .footer-header {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8125rem;
+    }
+    & .footer-title {
+      text-align: center;
+      font-weight: 600;
+      font-size: 3rem;
+      margin: 0;
+    }
+    & .footer-subtitle {
+      text-align: center;
+      font-weight: 400;
+      font-size: 1.5rem;
+      color: var(--yellow-400);
+      margin: 0;
+    }
+    & .footer-cta {
+      display: flex;
+      justify-content: space-between;
+      gap: 1.5rem;
+      height: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      & .separator {
+        width: 1px;
+        background-color: var(--stone-700);
+        margin: 0 1.5rem;
+      }
+    }
+
+    & .radial-gradient {
+      position: absolute;
+      width: 80%;
+      height: 100%;
+      aspect-ratio: 1;
+      bottom: 0;
+      left: calc(50% - 40%);
+      background: var(--radial-gradient);
+      z-index: -1;
+    }
+  }
+
+  @media (width <= 1024px) {
+    .footer {
+      padding: 0 24px;
+      & .footer-header {
+        padding: 0 24px;
+        & .footer-title {
+          font-size: 1.5rem;
+        }
+        & .footer-subtitle {
+          font-size: 1rem;
+        }
+      }
+      & .footer-cta {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 0 24px;
+        width: 100%;
+        & .separator {
+          width: 100%;
+          height: 1px;
+          background-color: var(--stone-700);
+          margin: 0;
+        }
+      }
+
+      & .badge {
+        padding: 40px 0;
+      }
+    }
+  }
+</style>
